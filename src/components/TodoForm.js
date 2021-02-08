@@ -34,6 +34,7 @@ const TodoForm = ({ addTodo }) => {
             type="text"
             value={title}
             onChange={(e) => onChange(e)}
+            required
           />
         </div>
         <div

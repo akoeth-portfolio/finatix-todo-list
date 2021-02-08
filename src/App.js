@@ -14,9 +14,8 @@ const App = () => {
     localStorage.setItem("TO_DO_LIST", JSON.stringify(todos));
   }, [todos]);
 
-  const addTodo = (todo) => {
-    if (todos) setTodos([todo, ...todos]);
-  };
+  const addTodo = (todo) => setTodos([todo, ...todos]);
+
   const removeTodo = (id) => {
     const todosFiltered = todos.filter((todo) => todo.id !== id);
     setTodos(todosFiltered);
@@ -26,7 +25,7 @@ const App = () => {
     <div style={{ marginLeft: "2rem" }}>
       <p>Todo Liste</p>
       <TodoForm addTodo={addTodo} />
-      {todos && todos.length === 0 ? (
+      {todos.length === 0 ? (
         <div style={{ marginTop: "2rem" }}>Die Todo Liste ist leer.</div>
       ) : (
         <TodoList todos={todos} removeTodo={removeTodo} />
