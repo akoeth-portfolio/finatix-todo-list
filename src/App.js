@@ -24,11 +24,14 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <header className="App-header"></header>
-      <p>Todo List</p>
+    <div style={{ marginLeft: "2rem" }}>
+      <p>Todo Liste</p>
       <TodoForm addTodo={addTodo} />
-      <TodoList todos={todos} removeTodo={removeTodo} />
+      {todos && todos.length === 0 ? (
+        <div style={{ marginTop: "2rem" }}>Die Todo Liste ist leer.</div>
+      ) : (
+        <TodoList todos={todos} removeTodo={removeTodo} />
+      )}
     </div>
   );
 }

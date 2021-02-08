@@ -1,23 +1,23 @@
 import React from "react";
 
 const TodoList = ({ todos, removeTodo }) => {
-  return (
-    <ul>
-      {todos.map((todo) => (
-        <div
-          style={{
-            display: "flex",
-            width: "15%",
-            justifyContent: "space-between",
-          }}
-        >
-          <div style={{ fontWeight: "bold" }}>{todo.title}</div>
-          <div>{todo.note}</div>
-          <button onClick={() => removeTodo(todo.id)}>erledigt</button>
-        </div>
-      ))}
-    </ul>
-  );
+  return todos.map((todo) => (
+    <div
+      style={{
+        display: "flex",
+        marginTop: "2rem",
+      }}
+    >
+      <div style={{ fontWeight: "bold" }}>{todo.title}</div>
+      <div style={{ marginLeft: "1rem" }}>{todo.note}</div>
+      <button
+        onClick={() => removeTodo(todo.id)}
+        style={{ marginLeft: "1rem" }}
+      >
+        erledigt
+      </button>
+    </div>
+  ));
 };
 
 export default TodoList;
