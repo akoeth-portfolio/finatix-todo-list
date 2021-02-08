@@ -14,21 +14,43 @@ const App = () => {
     localStorage.setItem("TO_DO_LIST", JSON.stringify(todos));
   }, [todos]);
 
-  const addTodo = (todo) => setTodos([todo, ...todos]);
+  const addTodo = (todo) => {
+    setTodos([todo, ...todos]);
+  };
 
-  const removeTodo = (id) => {
-    const todosFiltered = todos.filter((todo) => todo.id !== id);
-    setTodos(todosFiltered);
+  const markAsCompleted = (id) => {
+    setTodos(
+      todos.map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            completed: !todo.completed,
+          };
+        }
+        return todo;
+      })
+    );
+  };
+
+  const checkIfTodoListEmpty = () => {
+    let toDoListEmpty = true;
+    todos.forEach((todo) => {
+      if (!todo.completed) {
+        toDoListEmpty = false;
+        return;
+      }
+    });
+    return toDoListEmpty;
   };
 
   return (
     <div style={{ marginLeft: "2rem" }}>
       <p>Todo Liste</p>
       <TodoForm addTodo={addTodo} />
-      {todos.length === 0 ? (
+      {checkIfTodoListEmpty() ? (
         <div style={{ marginTop: "2rem" }}>Die Todo Liste ist leer.</div>
       ) : (
-        <TodoList todos={todos} removeTodo={removeTodo} />
+        <TodoList todos={todos} markAsCompleted={markAsCompleted} />
       )}
     </div>
   );

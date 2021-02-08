@@ -5,6 +5,7 @@ const TodoForm = ({ addTodo }) => {
   const [todo, setTodo] = useState({
     title: "",
     note: "",
+    completed: false,
   });
 
   const { title, note } = todo;
