@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 
-import "./App.css";
-
-function App() {
+const App = () => {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
-    const persistedTodos = () => JSON.parse(localStorage.getItem("TO_DO_LIST"));
+    const persistedTodos = JSON.parse(localStorage.getItem("TO_DO_LIST"));
     if (persistedTodos) setTodos(persistedTodos);
   }, []);
 
@@ -16,8 +14,9 @@ function App() {
     localStorage.setItem("TO_DO_LIST", JSON.stringify(todos));
   }, [todos]);
 
-  const addTodo = (todo) => setTodos([todo, ...todos]);
-
+  const addTodo = (todo) => {
+    if (todos) setTodos([todo, ...todos]);
+  };
   const removeTodo = (id) => {
     const todosFiltered = todos.filter((todo) => todo.id !== id);
     setTodos(todosFiltered);
@@ -34,6 +33,6 @@ function App() {
       )}
     </div>
   );
-}
+};
 
 export default App;
